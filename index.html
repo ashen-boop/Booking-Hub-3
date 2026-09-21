@@ -923,6 +923,61 @@
                 max-height: 250px;
             }
         }
+
+        /* ===== GLOW EFFECT FOR PRIMARY BUTTON ===== */
+        .btn-glow {
+            /* ============ GLOW CONTROLS ============ */
+            --glow-color: 220, 53, 69;        /* RGB of glow (matches your red #dc3545) */
+            --glow-strength: 1;                /* 0 = off, 1 = normal, 2 = intense */
+            --glow-speed: 1s;                  /* how long one pulse takes */
+            --glow-spread: 12px;               /* how far the glow reaches */
+            --glow-blur: 5px;                 /* softness of the glow */
+            /* ======================================== */
+
+            position: relative;
+            z-index: 1;
+            animation: btnGlowPulse var(--glow-speed) ease-in-out infinite;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* The pulsing glow animation */
+        @keyframes btnGlowPulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 calc(var(--glow-spread) * 0.5 * var(--glow-strength))
+                        calc(var(--glow-blur) * 0.2 * var(--glow-strength))
+                        rgba(var(--glow-color), calc(0.35 * var(--glow-strength))),
+                    0 0 calc(var(--glow-spread) * 1 * var(--glow-strength))
+                        calc(var(--glow-blur) * 0.4 * var(--glow-strength))
+                        rgba(var(--glow-color), calc(0.15 * var(--glow-strength)));
+            }
+            50% {
+                box-shadow:
+                    0 0 calc(var(--glow-spread) * 1.2 * var(--glow-strength))
+                        calc(var(--glow-blur) * 0.6 * var(--glow-strength))
+                        rgba(var(--glow-color), calc(0.75 * var(--glow-strength))),
+                    0 0 calc(var(--glow-spread) * 2.2 * var(--glow-strength))
+                        calc(var(--glow-blur) * 1.4 * var(--glow-strength))
+                        rgba(var(--glow-color), calc(0.35 * var(--glow-strength)));
+            }
+        }
+
+        /* Keep it glowing on hover too (overrides your default hover shadow) */
+        .btn-glow:hover {
+            box-shadow:
+                0 0 calc(var(--glow-spread) * 1.4 * var(--glow-strength))
+                    calc(var(--glow-blur) * 0.8 * var(--glow-strength))
+                    rgba(var(--glow-color), calc(0.85 * var(--glow-strength))),
+                0 0 calc(var(--glow-spread) * 2.6 * var(--glow-strength))
+                    calc(var(--glow-blur) * 1.6 * var(--glow-strength))
+                    rgba(var(--glow-color), calc(0.45 * var(--glow-strength)));
+            animation-play-state: paused;
+        }
+
+        /* Optional: gently pause the pulse when hovering so it doesn't fight your hover state */
+        .btn-glow:active {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body>
@@ -955,12 +1010,12 @@
         </p>
     </div>
 
-    <div class="price-tag">Starting at $3,500 (Negotiable)</div>
+    <div class="price-tag">Starting at $30,000</div>
 
     <!-- WHAT'S INCLUDED -->
     <h2>What's Included</h2>
     <div class="feature-grid">
-        <div class="feature-item">✅ Custom booking app (web or mobile)</div>
+        <div class="feature-item">✅ Fully functional Custom booking app (web or mobile)</div>
         <div class="feature-item">✅ Beautiful UI/UX design</div>
         <div class="feature-item">✅ Automated reminders & confirmations</div>
         <div class="feature-item">✅ Traffic generation & marketing</div>
@@ -975,7 +1030,7 @@
     </p>
 
     <div style="text-align: center;">
-        <a href="https://booking-presentation.vercel.app/" class="btn-primary">See Website Examples→</a>
+        <a href="https://booking-presentation.vercel.app/" class="btn-primary btn-glow">See Website Examples→</a>
     </div>
 
     <p style="font-size: 0.85rem; color: #6c757d; text-align: center; margin-top: 1.5rem;">
@@ -983,70 +1038,53 @@
     </p>
 </div>
 
-<!-- ===== ABOUT US SECTION ===== -->
-<section class="about-section" id="about">
+
+
+
+<!-- ===== ABOUT SECTION (moved to top) ===== -->
+<section class="about-section" id="about" style="margin-top: 2.5rem;">
     <h2>About The Artistic Unity</h2>
     <p>
         With deep expertise in web development and design, our team of engineers, designers,
         and strategists work side-by-side to ensure every module, every data flow,
         and every integration serves one purpose: <strong>your operational excellence</strong>.
     </p>
-
-    <div class="about-grid">
-        <div class="about-card">
-            <h3>🔧 Engineering-first</h3>
-            <p>We build scalable, secure, and maintainable systems. No shortcuts, no technical debt.</p>
-        </div>
-        <div class="about-card">
-            <h3>📊 Data-driven</h3>
-            <p>Every dashboard, report, and alert is designed to give you actionable insights, not just numbers.</p>
-        </div>
-        <div class="about-card">
-            <h3>🎨 Design-led</h3>
-            <p>Beautiful, intuitive interfaces that your customers will love to use.</p>
-        </div>
-        <div class="about-card">
-            <h3>🤝 Long-term partnership</h3>
-            <p>We're not a vendor; we're your technology partner. Your growth is our success.</p>
-        </div>
-    </div>
-</section>
+   
 
 <!-- ===== SERVICES SECTION ===== -->
-<div class="container" id="services" style="margin-top: 0;">
-    <h2 style="margin-top: 0;">Our Booking Services</h2>
+<div class="container" id="services" style="margin-top: 2.5rem;">
+    <h2 style="margin-top: 0;">Our Three Pillars</h2>
     <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 0.5rem;">Click any card to learn more</p>
 
     <div class="services-scroll-wrapper">
         <div class="services-scroll">
             <div class="service-card" data-service="webdev">
-                <h3>🌐 Responsive Mobile App/Website</h3>
-                <p>Custom booking app or reservation system tailored to your business.</p>
+                <h3>🌐 The Booking System</h3>
+                <p>A custom booking app or reservation site built around your business — guests reserve 24/7, staff manage from one dashboard.</p>
                 <span class="click-hint">↕ Click to learn more</span>
             </div>
             <div class="service-card" data-service="design">
-                <h3>🎨 We Digitalize your Brand Identity!</h3>
-                <p>Beautiful, intuitive interfaces aligned with your brand identity.</p>
+                <h3>🎨 The Brand Experience</h3>
+                <p>Beautiful, intuitive interfaces aligned with your brand — so every booking feels as premium as your service.</p>
                 <span class="click-hint">↕ Click to learn more</span>
             </div>
             <div class="service-card" data-service="marketing">
-                <h3>📈 We Close The Sales for you</h3>
-                <p>Drive targeted traffic to your booking page for free and fill your calendar.</p>
+                <h3>📈 The Growth Engine</h3>
+                <p>Targeted traffic and organic promotion that keeps your calendar full — without paid ads eating your margin.</p>
                 <span class="click-hint">↕ Click to learn more</span>
             </div>
             <div class="service-card" data-service="integration">
                 <h3>🔗 Full Integration</h3>
-                <p>All services work together for a seamless booking experience.</p>
+                <p>All services work together for a seamless booking experience — build, brand, grow, and operate as one system.</p>
                 <span class="click-hint">↕ Click to learn more</span>
             </div>
         </div>
     </div>
 
     <p style="text-align: center; color: #2b3a4a; font-size: 0.95rem; margin-top: 1rem;">
-        <strong>All modules</strong> are designed to work together — because fragmented systems kill productivity.
+        <strong>All three pillars work together</strong> — build, brand, grow, and integrate. That's the Booking Hub difference.
     </p>
 </div>
-
 <!-- ===== CONTACT SECTION ===== -->
 <section class="contact-section" id="contact">
     <h2>Let's build your booking system</h2>
@@ -1055,7 +1093,7 @@
     </p>
     <div class="btn-group">
         <a href="https://copecart.com/us/products/71c85b19/checkout" class="btn-primary" style="margin-top: 0;">Get Started!</a>
-        <a href="mailto:ashen@theartisticunity.art" class="btn-secondary">ashen@theartisticunity.art</a>
+        <a href="mailto:theartisticunity18@gmail.com" class="btn-secondary">theartisticunity18@gmail.com</a>
     </div>
     <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #6c757d;">
         📍 The Artistic Unity, No.251/1/1/1 , Galle Road, Panadura, Sri Lanka<br>
@@ -1156,29 +1194,45 @@
 <!-- ============================================ -->
 <!-- ===== EXPLANATION MODAL ===== -->
 <!-- ============================================ -->
+<!-- ============================================ -->
+<!-- ===== EXPLANATION MODAL ===== -->
+<!-- ============================================ -->
 <div class="modal-overlay" id="modal-explanation">
     <div class="modal-box">
         <div class="modal-icon">💡</div>
         <h3>How Booking Hub Works</h3>
-        <div class="modal-subtitle">The Three Ingredients</div>
+        <div class="modal-subtitle">Bookings on autopilot</div>
 
-        <p class="modal-description" style="margin-bottom: 1rem;">
-            With <strong>Web Development</strong>, we build a custom booking app or reservation system — tailored to your business and your customers' needs.
+        <p class="modal-description" style="margin-bottom:1rem;">
+            Most businesses still take bookings by phone, WhatsApp, or email — which means missed calls, double bookings, and staff wasting hours on admin.
         </p>
-        <p class="modal-description" style="margin-bottom: 1rem;">
-            Then we layer in <strong>unique Graphic Design</strong> to make the interface beautiful, intuitive, and aligned with your brand.
+
+        <p class="modal-description" style="margin-bottom:1rem;">
+            <strong>Booking Hub replaces all of that with one system.</strong> Your customers book themselves — 24/7, from any device. Your staff manage everything from a single dashboard. No calls. No conflicts. No chaos.
         </p>
-        <p class="modal-description" style="margin-bottom: 1rem; font-weight: 500;">
-            Just a booking system that no one uses? That's not the point.
+
+        <p class="modal-description" style="margin-bottom:1rem; font-weight:500;">
+            What you get:
         </p>
-        <p class="modal-description" style="margin-bottom: 1.5rem;">
-            Finally, we drive <strong>targeted traffic</strong> to your booking page through <strong>Strategic Digital Marketing</strong> — so your booking system actually fills up.
+
+        <ul class="modal-features">
+            <li><strong>Custom booking page</strong> — guests reserve in seconds, no account needed</li>
+            <li><strong>Real-time availability</strong> — zero double-bookings, ever</li>
+            <li><strong>Automated reminders</strong> — SMS &amp; email cut no-shows up to 40%</li>
+            <li><strong>Full backend control</strong> — manage staff, tables, rooms, and schedules</li>
+            <li><strong>Live statistics</strong> — peak hours, repeat guests, revenue per booking</li>
+            <li><strong>Multi-location support</strong> — run every branch from one place</li>
+            <li><strong>Payments &amp; deposits</strong> — take payment at the time of booking</li>
+            <li><strong>Works on any device</strong> — desktop, tablet, and mobile</li>
+        </ul>
+
+        <p class="modal-description" style="margin-top:1rem; margin-bottom:1.5rem; font-family:'Georgia', serif; font-size:1.1rem; text-align:center;">
+            We deliver revenue, not just software.
         </p>
 
         <button class="modal-close-btn" data-close="modal-explanation">Close</button>
     </div>
 </div>
-
 <!-- ============================================ -->
 <!-- ===== LEGAL POPUP - HORIZONTAL SCROLLER ===== -->
 <!-- ============================================ -->
@@ -1208,7 +1262,7 @@
 
             <strong>Data security:</strong> We use industry-standard encryption and access controls. Your data is stored securely and retained only as long as necessary.
 
-            <strong>Your rights:</strong> You may request access, correction, or deletion of your data at any time by emailing ashen@theartisticunity.art.
+            <strong>Your rights:</strong> You may request access, correction, or deletion of your data at any time by emailing theartisticunity18@gmail.com.
 
             This policy may be updated periodically. Last revised: March 2026.
         </div>
@@ -1312,7 +1366,7 @@
 
                 <strong>Data security:</strong> We use industry-standard encryption and access controls. Your data is stored securely and retained only as long as necessary.
 
-                <strong>Your rights:</strong> You may request access, correction, or deletion of your data at any time by emailing ashen@theartisticunity.art.
+                <strong>Your rights:</strong> You may request access, correction, or deletion of your data at any time by emailing theartisticunity18@gmail.com.
 
                 This policy may be updated periodically. Last revised: March 2026.`,
 
@@ -1345,7 +1399,7 @@
 
                 <strong>Your choice:</strong> You can manage or disable cookies in your browser settings. However, disabling essential cookies may affect site functionality.
 
-                We do not use cookies to collect personally identifiable information without your explicit consent. For more details, email ashen@theartisticunity.art.`,
+                We do not use cookies to collect personally identifiable information without your explicit consent. For more details, email theartisticunity18@gmail.com.`,
 
             disclaimer: `<span class="doc-title">Disclaimer</span>
                 The information provided on this website and through our services is for general informational purposes only. While we strive to keep everything accurate and up to date, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website for any purpose.
